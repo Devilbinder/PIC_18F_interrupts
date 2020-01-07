@@ -1,8 +1,8 @@
 #include <xc.h>
-#include <p18f4520.h>
+#include <pic18f4520.h>
 #include "conbits.h"
 
-void interrupt high_isr(void){
+void __interrupt() high_isr(void){
     INTCONbits.GIEH = 0;
     
     if(INTCONbits.INT0IF){
@@ -14,7 +14,7 @@ void interrupt high_isr(void){
     INTCONbits.GIEH = 1;
 }
 
-void interrupt low_priority low_isr(void){
+void __interrupt(low_priority) low_isr(void){
     INTCONbits.GIEH = 0;
     
     if(INTCON3bits.INT1IF){
